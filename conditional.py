@@ -29,9 +29,12 @@
 
 #       QUESTION : 4
 # Accept a year and check weather it is leap or not 
-alphabet = input("enter your char:")
-if alphabet in "aeiouAEIOU":
-    print(f"{alphabet} is  Vowel")
-else:
-    print("consonent")
+# alphabet = input("enter your char:")
+# if alphabet in "aeiouAEIOU":
+#     print(f"{alphabet} is  Vowel")
+# else:
+#     print("consonent")
+
+#       QUESTION : 4
+# Accept a year and check weather it is leap or not 
 
