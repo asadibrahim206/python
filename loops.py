@@ -48,3 +48,18 @@
 # else:
 #     print(f"{n} is a prime number")
 
+# Question 5
+# print each number in a new line like
+# 123
+# 3
+# 2
+# 1
+n = int(input('ENTER YOUR NUMBER: '))
+
+while n > 0:
+    print(n%10)
+    n = n//10
+
+
+
+
