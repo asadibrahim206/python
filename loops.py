@@ -48,18 +48,30 @@
 # else:
 #     print(f"{n} is a prime number")
 
-# Question 5
+# Question 6
 # print each number in a new line like
 # 123
 # 3
 # 2
 # 1
+# n = int(input('ENTER YOUR NUMBER: '))
+# while n > 0:
+#     print(n%10)
+#     n = n//10
+
+# Question 7
+# POLLINDROME
+
 n = int(input('ENTER YOUR NUMBER: '))
-
+rev = 0
+copy = n
 while n > 0:
-    print(n%10)
-    n = n//10
-
-
-
+    z= n % 10
+    rev = rev * 10 + z
+    n= n//10
+   
+if rev == copy:
+    print("Number is Pollindrome")
+else:
+    print("not pollindrome")
 
