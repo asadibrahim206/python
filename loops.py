@@ -62,16 +62,16 @@
 # Question 7
 # POLLINDROME
 
-n = int(input('ENTER YOUR NUMBER: '))
-rev = 0
-copy = n
-while n > 0:
-    z= n % 10
-    rev = rev * 10 + z
-    n= n//10
+# n = int(input('ENTER YOUR NUMBER: '))
+# rev = 0
+# copy = n
+# while n > 0:
+#     z= n % 10
+#     rev = rev * 10 + z
+#     n= n//10
    
-if rev == copy:
-    print("Number is Pollindrome")
-else:
-    print("not pollindrome")
+# if rev == copy:
+#     print("Number is Pollindrome")
+# else:
+#     print("not pollindrome")
 
