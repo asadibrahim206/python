@@ -92,17 +92,20 @@
 # Longest word: Exercises
 # Length of the longest word: 9
 
-word_list = ["php","exercise","backend","Computer Science"]
-word_len = []
+# word_len =[]
+# word_list=["php","exercise","programming","backend"]
 
-for i in word_list:
-    word_len.append((len(i),i))
-    word_len.sort()
-    result = word_len[-1][1]
-    result_len = word_len[-1][0]
+# for i in word_list:
 
-print(f"this is the  longest word : {result}")
-print(f"this is the length of the longest word : {result_len}")
+#     word_len.append((len(i),i))
+#     word_len.sort()
+#     longest_word = word_len[-1][1]
+#     longest_len = word_len[-1][0]
+
+# print(longest_word)
+# print(longest_len)
+    
+
 
 
 
