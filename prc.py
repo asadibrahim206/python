@@ -6,19 +6,14 @@
 # Expected Result : 'The lyrics is good!'
 # 'The lyrics is poor!'
 
+str =  'google.com'
+elem = {}
 
-
-def replace_substring(str):
-
-
-    snot = str.find("not")
-    spoor = str.find("poor")
-
-    if snot < spoor and snot > 0 and spoor > 0:
-        str.replace(str[snot:spoor+4],"GOOD")
-        return (str.replace(str[snot:spoor+4],"GOOD"))
+for i in str:
+    keys = elem.keys()
+    if i in keys:
+        elem[i] += 1
     else:
-        return (str)
+        elem[i] = 1
 
-
-print(replace_substring("The lyrics is not that poor!"))
+print(elem)
