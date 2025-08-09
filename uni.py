@@ -277,10 +277,25 @@ str ="""Anhui Agricultural University,
 str_data = """Harbin Institute of Technology,
 Central South University,
 The University of Science and Technology of China,
+Renmin University of China,
+Fudan University,
+Tsinghua University,
+Xidian University,
+xiamen,
+Hunan University,
+Nankai University,
+Southwest Jiaotong University,
+Chongqing University,
+East China University of Science and Technology,
+Donghua University,
+wuhan university,
+Beihang University,
+Zhejiang University,
+Peking University
 
 """
 universities_list = str.split(",")
-Univeristy_offering_data = []
+Univeristy_offering_data = str_data.split(",")
 university = input("University Name: ")
 if university in str:
     print(True)
