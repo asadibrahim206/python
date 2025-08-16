@@ -21,17 +21,10 @@ while True:
          print("tie")
     elif user_choice == 'r' and computer_choice == 'p' or user_choice == 'p' and computer_choice == 's' or  user_choice == 's' and computer_choice == 'r':    
         print("Computer Wins")
-        user_count -=1
-        if user_count == 0:
-            print("GAME OVER , YOU LOOSE")
-            break
+        user_count -=1 
 
     elif user_choice == 'p' and computer_choice == 'r' or user_choice == 's' and computer_choice == 'p' or  user_choice == 'r' and computer_choice == 's':
         print("USER Wins")
-        computer_count -=1
-        if computer_count == 0:
-            print("YOU WIN!!!") 
-            break
                     
     else:
         print("inValid Input....Please try again")
