@@ -20,12 +20,14 @@ while True:
     if user_choice == computer_choice:
          print("tie")
     elif user_choice == 'r' and computer_choice == 'p' or user_choice == 'p' and computer_choice == 's' or  user_choice == 's' and computer_choice == 'r':    
-        print("Computer Wins")
         user_count -=1 
-
+        if  user_count == 0:
+            print("Computer Wins")
+        
     elif user_choice == 'p' and computer_choice == 'r' or user_choice == 's' and computer_choice == 'p' or  user_choice == 'r' and computer_choice == 's':
-        print("USER Wins")
-                    
+         if  user_count == 0:
+            print("USER Wins")
+                  
     else:
         print("inValid Input....Please try again")
 
