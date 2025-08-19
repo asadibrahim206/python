@@ -6,14 +6,17 @@
 # Expected Result : 'The lyrics is good!'
 # 'The lyrics is poor!'
 
-str =  'google.com'
-elem = {}
+# def count_char():
 
-for i in str:
-    keys = elem.keys()
-    if i in keys:
-        elem[i] += 1
-    else:
-        elem[i] = 1
+#     elem = {}
 
-print(elem)
+#     for i in str:
+#     keys = elem.keys()
+#     if i in keys:
+#         elem[i] += 1
+#     else:
+#         elem[i] = 1
+
+# Z= count_char("GOOGLE.COM")
+# print(Z 
+# )
