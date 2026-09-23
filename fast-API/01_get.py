@@ -8,6 +8,7 @@ def load_data():
 
 app = FastApi()
 
-app.get("/"):
+app.get("/")
     def view():
-        load_data()
+        data = load_data()
+        return data
