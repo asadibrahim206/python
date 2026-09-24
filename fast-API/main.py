@@ -27,7 +27,7 @@ def view_patient(patient_id : str = Path(...,description = "GIVE PATIENT ID" , e
         return data[patient_id]
     raise HTTPException(status_code = 404, detail = "patient not found")
 
-@app.get("/sort")
+@app.get("/sort")                        #PQuery Parameter
 def sort_patients(
     sort_by: str = Query(..., description = "Sort patient by [height,bmi,weight]"), 
     order_by :str = Query('asc',description = "asc -desc")
