@@ -9,4 +9,3 @@ patient = {
         "verdict": "Obese"
  }
 
-print(patient[name])
