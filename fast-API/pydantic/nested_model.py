@@ -14,12 +14,14 @@ class Patient(BaseModel):
     address : Address
 
 
+address_dict = { 'city': 'chitral' ,'state':'kpk', 'village': 'danin'}
+address1 = Address(**address_dict)
+
+patient_info = {'name': 'asad', 'age':23, 'weight': 55.4 , 'allergy': ['posicle', 'pollen', 'migrain'], 'address':address1}
+
+patient1 = Patient(**patient_info)
+
+temp = patient1.model_dump()   #it will convert pydantic model to dic t need when we work with apis and when need to export
 
 
-
-
-
-
-address_dict = {'city': 'chitral' , 'state':'kpk', 'village': 'danin'}
-address = Address(**address_dict)
-
+print(temp)

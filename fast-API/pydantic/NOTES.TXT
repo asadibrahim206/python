@@ -26,3 +26,12 @@ from pydantic import model_validator
 #on the when you need something which user cant give you you can calculate it with computed field
 #**the name you set for your def function below @property to calculate bmi it name becomes your field name e.g def calcualte_bmi
 #so whenever we have to call it or print it objectName.calcualte_bmi
+
+SERIALIZATION 
+#obj.model_dump() it will convert our pydantic model to dictionary helpful when working with api and exporting
+#we have another method to convert to json obj.model_dump_json() -> convert to json
+#it also take parameter include / exclude for example model_dump(include = ['name', 'address']) it will only give you name and address
+#likewise exclude = ['name' , 'address'] it will exclude these from final output
+#there is another parameter (exclude_unset = True) do not include optional fields  
+
+Formula: Meters = Feet × 0.3048  reverse for feet to meter  feet = meter/0.3048
