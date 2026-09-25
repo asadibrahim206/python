@@ -1,0 +1,28 @@
+
+@field_validator
+#from pydantic import field_validator
+#field_validator also take a parameter mode (before/after) by default it is /after'
+# it will treat value after coresion or before , like we pass pass age as str and mode
+#mode is set to before it will thorow error cuz it will treat it as string and cant 
+#cant comapare it with number
+#field_validator work for a single field
+
+
+@model_validator
+#if we have to validate base on two or more fields  we use model validator
+from pydantic import model_validator
+#it is also used with a decorator called @model_validator(mode  = after) ** it does not take any field name as input nor use classmethod
+#it take whole model as parameter instead of field i.e def model (cls,model):
+#
+
+
+@computed_field
+@property      
+#from pydantic import computed_field                  
+#@computed_field is always use witn @property decorator
+#we use it to perfome calculation in field 
+#let say if we have weight and height given we can find bmi
+#in the process of building a pydantic model our computed field will also be calculated and we can print it.
+#on the when you need something which user cant give you you can calculate it with computed field
+#**the name you set for your def function below @property to calculate bmi it name becomes your field name e.g def calcualte_bmi
+#so whenever we have to call it or print it objectName.calcualte_bmi
