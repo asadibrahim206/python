@@ -1,0 +1,6 @@
+
+FIELD_VALIDATOR
+#field_validator also take a parameter mode (before/after) by default it is /after'
+# it will treat value after coresion or before , like we pass pass age as str and mode
+#mode is set to before it will thorow error cuz it will treat it as string and cant 
+#cant comapare it with number
