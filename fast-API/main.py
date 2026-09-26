@@ -1,11 +1,11 @@
 from fastapi import FastAPI,Path, HTTPException,Query
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, computed_field,Field
-from typing import Annotated,Literal
+from typing import Annotated,Literal,Optional
 import json
 
 
-
+#PYDANTIC MODEL FOR POST:
 class Patient(BaseModel):
     id :     Annotated[str, Field(..., description = "Provide patient ID :" , example = 'P001')]
     name :  Annotated[str, Field(..., description = "Provide the patient Name: ")]
@@ -32,6 +32,16 @@ class Patient(BaseModel):
             return "chuby"
         else:
             return "Obese"
+
+#PYDANTIC MODEL FOR PUT:
+class PatientUpdate(BaseModel):
+        name :  Annotated[Optional[str], Field(default =None )]
+        city :  Annotated[Optional[str], Field(default = None)]
+        age :   Annotated[Optional[int], Field(default = None, gt = 0)]
+        gander: Annotated[Optional[Literal['male','female','other']], Field(default = None)]
+        height: Annotated[Optional[float], Field(default = None,gt = 0)]
+        weight: Annotated[Optional[float], Field(default = None, gt = 0)]
+    
 
 app = FastAPI()
 
@@ -91,10 +101,25 @@ def add_patient(patient:Patient): #we wil directly pass the data to our pydantic
     data = load_data()
 #CHECK IF PATIENT LREADY EXISTIS
     if patient.id in data:
-        raise HTTPException(status_code = 400, detail="patent already exists")
+        raise HTTPException(status_code = 400, detail="patient already exists")
 #new patiet addded to dict
     data[patient.id] = patient.model_dump(exclude = ['id'])
 #save data to json
     save_data(data)
 
     return JSONResponse(status_code = 201, content = {'message': "patient added successfully..uvi"} )
+
+
+@app.post('/edit/{patient_id}')
+def update_patient(self,patient_id, patient_update : Patient):
+    data = load_data()
+    if data not in patient_id:
+        raise HTTPException (status_code = 404, details  = "patient not found")
+
+    existing_patient = data[patient_id]
+    update_patient = patient_update.model_dump(exclude_unset=True)
+
+    for key , value in update_patient.items():
+        existing_patient[key] = value 
+
+    print(existing_patient) 
