@@ -114,7 +114,7 @@ def add_patient(patient:Patient): #we wil directly pass the data to our pydantic
 def update_patient(patient_id:str, patient_update : PatientUpdate):
     data = load_data()
     if patient_id not in data:
-        raise HTTPException (status_code = 404, details  = "patient not found")
+        raise HTTPException (status_code = 404, detail = "patient not found")
 
     existing_patient = data[patient_id]
     update_patient = patient_update.model_dump(exclude_unset=True)
