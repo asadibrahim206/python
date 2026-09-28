@@ -111,9 +111,9 @@ def add_patient(patient:Patient): #we wil directly pass the data to our pydantic
 
 
 @app.post('/edit/{patient_id}')
-def update_patient(self,patient_id, patient_update : Patient):
+def update_patient(patient_id, patient_update : Patient):
     data = load_data()
-    if data not in patient_id:
+    if patient_id not in data:
         raise HTTPException (status_code = 404, details  = "patient not found")
 
     existing_patient = data[patient_id]
