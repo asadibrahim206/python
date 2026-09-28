@@ -11,7 +11,7 @@ class Patient(BaseModel):
     name :  Annotated[str, Field(..., description = "Provide the patient Name: ")]
     city :  Annotated[str, Field( ...,description = "Provide the patient City: ", example = 'Lahore')]
     age :   Annotated[int, Field(...,gt = 0,lt = 200, description = "Provide the patient Age: ")]
-    gander: Annotated[Literal ['male','female','other'], Field(description = "Provide the patient Gander: ")]
+    gender: Annotated[Literal ['male','female','other'], Field(description = "Provide the patient Gander: ")]
     height: Annotated[float, Field(gt = 0 ,lt =50, description = "Provide the patient Height: ")]
     weight: Annotated[float, Field(gt = 0, lt= 500, description = "Provide the patient Weight: ")]
 
@@ -26,7 +26,7 @@ class Patient(BaseModel):
     def verdict(self)->str:
         if self.bmi < 18.5:
             return "Under Weight"
-        elif self.bmi > 18.5 and self.bmi < 30:
+        elif self.bmi >= 18.5 and self.bmi < 30:
             return "Normal"
         elif self.bmi > 30 and self.bmi < 45:
             return "chuby"
@@ -52,7 +52,7 @@ def load_data():
     return data
 
 def save_data(data):
-    with open('patient.json', 'w') as f:
+    with open('patients.json', 'w') as f:
         json.dump(data, f)
 
 
@@ -110,8 +110,8 @@ def add_patient(patient:Patient): #we wil directly pass the data to our pydantic
     return JSONResponse(status_code = 201, content = {'message': "patient added successfully..uvi"} )
 
 
-@app.post('/edit/{patient_id}')
-def update_patient(patient_id, patient_update : Patient):
+@app.put('/edit/{patient_id}')
+def update_patient(patient_id:str, patient_update : PatientUpdate):
     data = load_data()
     if patient_id not in data:
         raise HTTPException (status_code = 404, details  = "patient not found")
@@ -122,4 +122,22 @@ def update_patient(patient_id, patient_update : Patient):
     for key , value in update_patient.items():
         existing_patient[key] = value 
 
-    print(existing_patient) 
+    #we have to convert it to pydantic model so the computed field works for the new data
+    #we did not had the id in the dict otherwise error will throw while creating pydantic model
+    existing_patient['id'] = patient_id        
+    updated =  Patient(**existing_patient)     
+    
+    #convert back to dict 
+    updated = updated.model_dump(exclude = 'id')
+
+    #add the new dict to data
+    data[patient_id] = updated
+
+    #save data
+    save_data(data)
+
+    return JSONResponse(status_code = 200, content ={"message":"this is done successfully"})
+
+    
+
+
