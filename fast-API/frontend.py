@@ -29,20 +29,28 @@ if st.button("Predict Premium Category"):
         "occupation": occupation
     }
 
-    try:
-        response = requests.post(API_URL, json=input_data)
-        result = response.json()
+try:
+    response = requests.post(API_URL, json=input_data, timeout=10)
 
-        if response.status_code == 200 and "response" in result:
-            prediction = result["response"]
-            st.success(f"Predicted Insurance Premium Category: **{prediction['predicted_category']}**")
+    if response.status_code == 200:
+        result = response.json()
+        prediction = result.get("response", result)  # works with or without the wrapper
+
+        st.success(f"Predicted Insurance Premium Category: **{prediction['predicted_category']}**")
+
+        # Only shown if your API returns them
+        if "confidence" in prediction:
             st.write("🔍 Confidence:", prediction["confidence"])
+        if "class_probabilities" in prediction:
             st.write("📊 Class Probabilities:")
             st.json(prediction["class_probabilities"])
+    else:
+        st.error(f"API Error: {response.status_code}")
+        st.code(response.text)
 
-        else:
-            st.error(f"API Error: {response.status_code}")
-            st.write(result)
-
-    except requests.exceptions.ConnectionError:
-        st.error("❌ Could not connect to the FastAPI server. Make sure it's running.")
+except requests.exceptions.Timeout:
+    st.error("⏱️ The request timed out.")
+except requests.exceptions.ConnectionError:
+    st.error("❌ Could not connect to the FastAPI server. Make sure it's running.")
+except Exception as e:
+    st.error(f"Unexpected error: {e}")
