@@ -28,6 +28,15 @@
         "weight": 45,
         "bmi": 17.58,
         "verdict": "Underweight"
+    },
+    "P008": {
+        "id": "P008",
+        "name": "Ali Khan",
+        "age": 25,
+        "city": "Islamabad",
+        "gender": "male",
+        "height": 1.75,
+        "weight": 70.0,
+        "bmi": 22.86
     }
-   
 }

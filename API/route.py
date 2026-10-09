@@ -19,24 +19,29 @@ class Patient(BaseModel):
     age : Annotated[int,  Field(..., gt = 0 , lt = 100,description= "this is for age")]
     city : Annotated[str, Field(..., description="this is for city")]
     gender: Annotated[Literal['male','female'], Field(..., description="this is for gender")]
-    height: Annotated[int, Field(..., description="Height")]
-    weight: Annotated[int, Field(...,description="weight")]
+    height: Annotated[float, Field(..., description="Height")]
+    weight: Annotated[float, Field(...,description="weight")]
  
     @computed_field
     @property
-    def bmi(self):
-        return (self.weight / self.height**2)
+    def bmi(self) -> float:
+        return round(self.weight / (self.height ** 2), 2)
 
     
     @field_validator("age")
     @classmethod
-    def check_age(cls, value:int):
+    def check_age(cls, value:int) -> int:
         if value < 18:
             raise ValueError("Patient must be at least 18 years old")
         return value
 
-
-
+class PatientUpdate(BaseModel)
+    name : Annotated[Optional[str], Field(description="this is the name field")]
+    age : Annotated[Optional[int],  Field(gt = 0 , lt = 100,description= "this is for age")]
+    city : Annotated[Optional[str], Field(description="this is for city")]
+    gender: Annotated[Optional[Literal['male','female']], Field(description="this is for gender")]
+    height: Annotated[Optional[float], Field(description="Height")]
+    weight: Annotated[Optional[float], Field(description="weight")]
 
 app =  FastAPI()
 
@@ -55,3 +60,7 @@ def create_patient(patient :Patient):
     save_data(data)
 
     return JSONResponse(status_code=201 , content = "successfully added")
+
+
+@app.put("/update_patient/{patient_id}")
+def update_patient()
