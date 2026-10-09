@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,HTTPException
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel,EmailStr
 import json
 
@@ -7,13 +8,13 @@ def open_data():
         data = json.load(f)
     return data
 
-print(open_data())
+
 class Patient(BaseModel):
     id : int
     name :str
     email: EmailStr
 
-patient = Patient()
+
 
 app =  FastAPI()
 
@@ -21,6 +22,8 @@ app =  FastAPI()
 def home():
     return {"message": "hello "}
 
-@app.post("/create_patient")
-def create_patient(Patient :patient):
+@app.post("/create_patient/{patient_id}")
+def create_patient(patient_id,patient :Patient):
     data = open_data()
+    if patient_id in data:
+        raise HTTPException(status_code = "400", detail= "patient already existts")
