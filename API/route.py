@@ -1,6 +1,6 @@
 from fastapi import FastAPI,HTTPException 
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel,EmailStr,Field
+from pydantic import BaseModel,EmailStr,Field , field_validator ,  computed_field
 from typing import Optional, Annotated,Literal
 import json
 
@@ -21,7 +21,21 @@ class Patient(BaseModel):
     gender: Annotated[Literal['male','female'], Field(..., description="this is for gender")]
     height: Annotated[int, Field(..., description="Height")]
     weight: Annotated[int, Field(...,description="weight")]
-    Annotated[str, Field(..., description="this is for city")]
+ 
+    @computed_field
+    @property
+    def bmi(self):
+        return (self.weight / self.height**2)
+
+    
+    @field_validator("age")
+    @classmethod
+    def check_age(cls, value:int):
+        if value < 18:
+            raise ValueError("Patient must be at least 18 years old")
+        return value
+
+
 
 
 app =  FastAPI()
